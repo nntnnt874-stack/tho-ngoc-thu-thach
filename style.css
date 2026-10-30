@@ -1,0 +1,2800 @@
+/* =========================================================
+   🌾 TẾT LÚA & NẾP
+   🎆 STYLE.CSS HOÀN CHỈNH
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #fff;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #b71c1c 0%,
+            #7f0000 45%,
+            #3b0000 100%
+        );
+}
+
+
+/* =========================================================
+   🎆 HIỆU ỨNG — KHÔNG ĐƯỢC CHẶN CLICK
+========================================================= */
+
+#effects,
+#flowerTrail,
+#victoryEffects,
+#startFireworks,
+.effects-layer,
+.flower-trail,
+.victory-fireworks,
+.start-fireworks {
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   🎆 PHÁO HOA MÀN HÌNH START
+========================================================= */
+
+#startFireworks,
+.start-fireworks {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none !important;
+
+    z-index: 2;
+}
+
+
+/* Tâm pháo */
+
+.start-firework {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background: #fff;
+
+    box-shadow:
+        0 0 8px #fff,
+        0 0 18px #ffd700,
+        0 0 35px #ff9800;
+
+    pointer-events: none;
+}
+
+
+/* Tia pháo */
+
+.start-spark {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    animation:
+        startSparkExplode
+        1.4s
+        cubic-bezier(.15,.7,.2,1)
+        forwards;
+}
+
+
+@keyframes startSparkExplode {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--angle))
+            translateY(0)
+            scale(1.5);
+
+        opacity: 1;
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--angle))
+            translateY(var(--distance))
+            scale(.05);
+
+        opacity: 0;
+    }
+}
+
+
+/* Ánh sáng khi pháo nổ */
+
+.start-flash {
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,1) 0%,
+            rgba(255,215,0,.75) 20%,
+            rgba(255,90,0,.25) 45%,
+            transparent 72%
+        );
+
+    animation:
+        startFlash
+        .55s
+        ease-out
+        forwards;
+
+    pointer-events: none;
+}
+
+
+@keyframes startFlash {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(.15);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(7);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   🏮 HEADER
+========================================================= */
+
+.tet-header {
+    position: relative;
+
+    min-height: 170px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px 80px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d50000,
+            #a40000 50%,
+            #7b0000
+        );
+
+    border-bottom:
+        5px solid #ffd54f;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.45);
+
+    z-index: 20;
+}
+
+
+.tet-header::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,215,0,.25),
+            transparent 55%
+        );
+
+    pointer-events: none;
+}
+
+
+.header-content {
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+}
+
+
+.tet-badge {
+    display: inline-block;
+
+    padding: 7px 18px;
+
+    margin-bottom: 8px;
+
+    border:
+        2px solid #ffd700;
+
+    border-radius: 30px;
+
+    color: #fff;
+
+    background:
+        rgba(120,0,0,.6);
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 0 15px rgba(255,215,0,.3);
+}
+
+
+.tet-header h1 {
+    margin: 5px 0;
+
+    color: #ffd700;
+
+    font-size:
+        clamp(28px, 5vw, 52px);
+
+    font-weight: 900;
+
+    text-shadow:
+        3px 3px 0 #7b0000,
+        0 0 20px rgba(255,215,0,.5);
+}
+
+
+.header-subtitle {
+    color: #fff3cd;
+
+    font-size:
+        clamp(14px, 2vw, 22px);
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+}
+
+
+.header-decoration {
+    margin-top: 8px;
+
+    color: #ffd700;
+
+    font-size: 20px;
+
+    letter-spacing: 10px;
+
+    animation:
+        decorationGlow
+        2s
+        infinite alternate;
+}
+
+
+@keyframes decorationGlow {
+
+    from {
+        opacity: .65;
+        text-shadow: 0 0 5px gold;
+    }
+
+    to {
+        opacity: 1;
+        text-shadow:
+            0 0 15px gold,
+            0 0 25px orange;
+    }
+}
+
+
+/* Đèn lồng */
+
+.lantern {
+    position: absolute;
+
+    top: 15px;
+
+    font-size: 58px;
+
+    filter:
+        drop-shadow(0 0 12px #ff9800);
+
+    animation:
+        lanternSwing
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+.lantern-left {
+    left: 35px;
+}
+
+
+.lantern-right {
+    right: 35px;
+
+    animation-delay:
+        .8s;
+}
+
+
+@keyframes lanternSwing {
+
+    0%,
+    100% {
+        transform:
+            rotate(-5deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(5deg)
+            translateY(8px);
+    }
+}
+
+
+/* =========================================================
+   🌾 NHÂN VẬT
+========================================================= */
+
+.characters-section {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    padding: 25px 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(110,0,0,.95),
+            rgba(70,0,0,.9)
+        );
+
+    z-index: 15;
+}
+
+
+.character-card,
+.enemy-card {
+    position: relative;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    padding: 15px;
+
+    transition:
+        transform .3s ease,
+        filter .3s ease;
+}
+
+
+.character-card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.03);
+}
+
+
+.character-image-wrap,
+.enemy-image-wrap {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 150px;
+    height: 150px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,215,0,.18),
+            transparent 68%
+        );
+}
+
+
+.character-image {
+    position: relative;
+
+    width: 125px;
+    height: 125px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 8px 12px rgba(0,0,0,.5));
+
+    animation:
+        characterFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+.character-nep .character-image {
+    animation-delay:
+        .5s;
+}
+
+
+@keyframes characterFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
+}
+
+
+.character-label {
+    margin-top: 5px;
+
+    color: #ffd700;
+
+    font-size: 23px;
+
+    font-weight: 900;
+
+    text-shadow:
+        2px 2px 3px #4b0000;
+}
+
+
+.character-role {
+    color: #ffe8a1;
+
+    font-size: 13px;
+}
+
+
+.character-glow {
+    position: absolute;
+
+    inset: 15px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,215,0,.18),
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    animation:
+        glowPulse
+        2s
+        infinite alternate;
+}
+
+
+@keyframes glowPulse {
+
+    from {
+        opacity: .4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* VS */
+
+.vs-badge {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    color: #fff;
+
+    background:
+        radial-gradient(
+            circle,
+            #ff9800,
+            #d50000
+        );
+
+    border:
+        3px solid #ffd700;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,.55);
+
+    animation:
+        vsPulse
+        1.2s
+        infinite alternate;
+}
+
+
+@keyframes vsPulse {
+
+    from {
+        transform: scale(.95);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   🦁 LÂN
+========================================================= */
+
+.enemy-card {
+    min-width: 190px;
+
+    padding: 14px 18px;
+
+    border:
+        2px solid #ff5252;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(90,0,0,.9),
+            rgba(40,0,0,.95)
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,0,0,.25);
+}
+
+
+.enemy-warning {
+    color: #ff5252;
+
+    font-weight: 900;
+
+    font-size: 14px;
+
+    animation:
+        warningBlink
+        1s
+        infinite alternate;
+}
+
+
+@keyframes warningBlink {
+
+    from {
+        opacity: .65;
+    }
+
+    to {
+        opacity: 1;
+        text-shadow:
+            0 0 12px red;
+    }
+}
+
+
+.enemy-image {
+    width: 130px;
+    height: 130px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 8px 15px rgba(0,0,0,.6));
+
+    animation:
+        enemyFloat
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes enemyFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-7px)
+            rotate(2deg);
+    }
+}
+
+
+.enemy-health {
+    margin-top: 5px;
+}
+
+
+.health-title {
+    margin-bottom: 5px;
+
+    color: #ffd700;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.health-bar {
+    width: 100%;
+    height: 13px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        #300000;
+
+    border:
+        2px solid #ff8a80;
+}
+
+
+.health-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00c853,
+            #76ff03
+        );
+
+    box-shadow:
+        0 0 10px #76ff03;
+
+    transition:
+        width .7s ease;
+}
+
+
+#enemyHealthText {
+    margin-top: 3px;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   🎮 SCREEN
+========================================================= */
+
+.screen {
+    position: relative;
+
+    width: 100%;
+
+    z-index: 10;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   🧧 START SCREEN
+========================================================= */
+
+.start-screen {
+    position: relative;
+
+    min-height: 650px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px 70px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(255,215,0,.08),
+            transparent 45%
+        );
+}
+
+
+.start-screen::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,215,0,.08),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(255,215,0,.08),
+            transparent 25%
+        );
+}
+
+
+.start-card {
+    position: relative;
+
+    width:
+        min(850px, 95vw);
+
+    padding:
+        35px
+        clamp(20px, 5vw, 55px);
+
+    text-align: center;
+
+    border:
+        3px solid #ffd700;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(150,0,0,.96),
+            rgba(80,0,0,.96)
+        );
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.55),
+        0 0 35px rgba(255,215,0,.18);
+
+    z-index: 50;
+}
+
+
+/* Trang trí */
+
+.start-decoration {
+    font-size: 45px;
+
+    margin-bottom: -5px;
+
+    animation:
+        envelopeFloat
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+.red-envelope {
+    font-size: 65px;
+
+    animation:
+        envelopeFloat
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes envelopeFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(3deg);
+    }
+}
+
+
+.start-card h2 {
+    margin: 12px 0;
+
+    color: #ffd700;
+
+    font-size:
+        clamp(27px, 5vw, 45px);
+
+    font-weight: 900;
+
+    text-shadow:
+        2px 3px 0 #680000,
+        0 0 20px rgba(255,215,0,.4);
+}
+
+
+.start-story {
+    max-width: 680px;
+
+    margin:
+        0 auto 25px;
+
+    color: #ffeec2;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.start-story strong {
+    color: #ffd700;
+}
+
+
+/* =========================================================
+   🎯 MISSION
+========================================================= */
+
+.mission-box {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin: 25px 0;
+
+    padding: 18px;
+
+    border:
+        2px solid rgba(255,215,0,.4);
+
+    border-radius: 20px;
+
+    background:
+        rgba(60,0,0,.55);
+}
+
+
+.mission-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 150px;
+
+    padding: 12px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,215,0,.25);
+}
+
+
+.mission-icon {
+    font-size: 35px;
+}
+
+
+.mission-item strong {
+    display: block;
+
+    color: #ffd700;
+
+    font-size: 16px;
+}
+
+
+.mission-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #ffe8bd;
+
+    font-size: 11px;
+}
+
+
+.mission-plus,
+.mission-equals {
+    color: #ffd700;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   🎯 NOTE
+========================================================= */
+
+.start-note {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin:
+        20px auto;
+
+    color: #ffe8b0;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   🎮 BUTTON
+========================================================= */
+
+.btn {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-weight: 900;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+
+    user-select: none;
+}
+
+
+.btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    filter: brightness(1.08);
+}
+
+
+.btn:active {
+    transform:
+        translateY(1px)
+        scale(.98);
+}
+
+
+.btn-start {
+    position: relative;
+
+    min-width: 260px;
+
+    padding:
+        17px 35px;
+
+    color: #7b0000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff176,
+            #ffd700,
+            #ffab00
+        );
+
+    border:
+        3px solid #fff8b0;
+
+    box-shadow:
+        0 8px 0 #9b6500,
+        0 12px 30px rgba(255,215,0,.35);
+
+    font-size: 22px;
+
+    z-index: 100;
+    
+    pointer-events: auto !important;
+}
+
+
+.btn-start:hover {
+    box-shadow:
+        0 8px 0 #9b6500,
+        0 0 30px rgba(255,215,0,.75);
+}
+
+
+.btn-icon {
+    font-size: 27px;
+}
+
+
+.btn-sparkle {
+    animation:
+        sparkle
+        1s
+        infinite alternate;
+}
+
+
+@keyframes sparkle {
+
+    from {
+        transform:
+            scale(.8)
+            rotate(-10deg);
+    }
+
+    to {
+        transform:
+            scale(1.3)
+            rotate(10deg);
+    }
+}
+
+
+/* =========================================================
+   ⚔️ GAME SCREEN
+========================================================= */
+
+.game-screen {
+    min-height: 900px;
+
+    padding:
+        25px
+        clamp(15px, 4vw, 60px)
+        60px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255,215,0,.07),
+            transparent 40%
+        );
+}
+
+
+/* Thanh trên */
+
+.game-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    max-width: 1200px;
+
+    margin:
+        0 auto 18px;
+
+    flex-wrap: wrap;
+}
+
+
+.game-title {
+    color: #ffd700;
+
+    font-size: 22px;
+
+    font-weight: 900;
+}
+
+
+.question-counter,
+.score-box {
+    padding:
+        9px 16px;
+
+    border:
+        2px solid rgba(255,215,0,.55);
+
+    border-radius: 14px;
+
+    background:
+        rgba(80,0,0,.7);
+
+    color: #ffe8a1;
+
+    font-weight: 800;
+}
+
+
+.score-box span {
+    color: #ffd700;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   📊 PROGRESS
+========================================================= */
+
+.progress-container {
+    max-width: 1200px;
+
+    margin:
+        0 auto 25px;
+}
+
+
+.progress-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    color: #ffe8b0;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+#progressPercent {
+    color: #ffd700;
+}
+
+
+.progress-bar {
+    height: 15px;
+
+    overflow: hidden;
+
+    border:
+        2px solid #ffd700;
+
+    border-radius: 30px;
+
+    background:
+        #320000;
+}
+
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9800,
+            #ffd700,
+            #fff176
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,215,0,.7);
+
+    transition:
+        width .6s ease;
+}
+
+
+/* =========================================================
+   ❓ QUESTION CARD
+========================================================= */
+
+.question-card {
+    position: relative;
+
+    max-width: 1000px;
+
+    margin:
+        0 auto 30px;
+
+    padding:
+        35px;
+
+    text-align: center;
+
+    border:
+        3px solid #ffd700;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(140,0,0,.96),
+            rgba(75,0,0,.96)
+        );
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.4);
+}
+
+
+.question-decoration {
+    margin-bottom: 10px;
+
+    color: #ffd700;
+
+    font-size: 20px;
+
+    letter-spacing: 8px;
+}
+
+
+.question-number {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    padding:
+        6px 15px;
+
+    border-radius: 20px;
+
+    color: #7b0000;
+
+    background:
+        #ffd700;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+
+.question-card h2 {
+    margin-bottom: 25px;
+
+    color: #fff4cc;
+
+    font-size:
+        clamp(19px, 3vw, 28px);
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   📝 ANSWERS
+========================================================= */
+
+.answers-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    max-width: 850px;
+
+    margin:
+        0 auto;
+}
+
+
+.answer-btn {
+    position: relative;
+
+    min-height: 75px;
+
+    padding:
+        15px 20px;
+
+    border:
+        2px solid rgba(255,215,0,.45);
+
+    border-radius: 16px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.03)
+        );
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    transition:
+        all .2s ease;
+}
+
+
+.answer-btn:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #ffd700;
+
+    background:
+        rgba(255,215,0,.13);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.25);
+}
+
+
+.answer-btn.correct {
+    border-color:
+        #69f0ae;
+
+    background:
+        rgba(0,200,83,.25);
+
+    box-shadow:
+        0 0 20px rgba(105,240,174,.3);
+}
+
+
+.answer-btn.wrong {
+    border-color:
+        #ff5252;
+
+    background:
+        rgba(213,0,0,.3);
+
+    animation:
+        wrongShake
+        .35s
+        ease;
+}
+
+
+@keyframes wrongShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
+
+.answer-btn:disabled {
+    cursor: default;
+}
+
+
+/* =========================================================
+   🎉 FEEDBACK
+========================================================= */
+
+.feedback {
+    margin-top: 25px;
+
+    padding:
+        18px;
+
+    border:
+        2px solid #ffd700;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,215,0,.08);
+
+    animation:
+        feedbackAppear
+        .35s
+        ease;
+}
+
+
+@keyframes feedbackAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+
+.feedback-icon {
+    font-size: 38px;
+}
+
+
+.feedback-title {
+    margin-top: 5px;
+
+    color: #ffd700;
+
+    font-size: 23px;
+
+    font-weight: 900;
+}
+
+
+.feedback-text {
+    margin-top: 5px;
+
+    color: #ffeec0;
+}
+
+
+/* Nút tiếp */
+
+.btn-next {
+    margin-top: 20px;
+
+    padding:
+        13px 25px;
+
+    color: #7b0000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd700,
+            #ffab00
+        );
+
+    font-size: 16px;
+
+    box-shadow:
+        0 5px 0 #8d5b00;
+}
+
+
+.btn-next:active {
+    box-shadow:
+        0 2px 0 #8d5b00;
+}
+
+
+/* =========================================================
+   ⚔️ BATTLE SCENE
+========================================================= */
+
+.battle-scene {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+
+    min-height: 230px;
+
+    max-width: 1000px;
+
+    margin:
+        0 auto;
+
+    padding: 20px;
+
+    border:
+        2px solid rgba(255,215,0,.3);
+
+    border-radius: 25px;
+
+    background:
+        rgba(45,0,0,.5);
+
+    overflow: hidden;
+}
+
+
+.battle-character {
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.battle-character img {
+    width: 140px;
+    height: 140px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 8px 10px rgba(0,0,0,.55));
+}
+
+
+.battle-lua img,
+.battle-nep img {
+    animation:
+        battleFloat
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+.battle-nep img {
+    animation-delay:
+        .3s;
+}
+
+
+.battle-enemy img {
+    animation:
+        enemyBattle
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes battleFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+
+@keyframes enemyBattle {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+    }
+}
+
+
+.battle-vs {
+    color: #ffd700;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 15px orange;
+
+    z-index: 10;
+}
+
+
+.attack-effect {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size: 55px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   💬 COMIC
+========================================================= */
+
+.comic {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+
+.speech {
+    position: absolute;
+
+    padding:
+        10px 15px;
+
+    border:
+        2px solid #7b0000;
+
+    border-radius: 15px;
+
+    color: #7b0000;
+
+    background: #fff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.25);
+}
+
+
+.lua-speech {
+    left: 5%;
+    top: 10%;
+}
+
+
+.nep-speech {
+    right: 5%;
+    top: 10%;
+}
+
+
+/* =========================================================
+   🦁 ENEMY STATUS
+========================================================= */
+
+.enemy-status {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    max-width: 700px;
+
+    margin:
+        20px auto 0;
+
+    padding:
+        12px 18px;
+
+    border-radius: 15px;
+
+    color: #ffeab5;
+
+    background:
+        rgba(80,0,0,.7);
+
+    border:
+        1px solid rgba(255,215,0,.35);
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   🏆 END SCREEN
+========================================================= */
+
+.end-screen {
+    position: relative;
+
+    min-height: 900px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        50px 20px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,215,0,.14),
+            transparent 55%
+        );
+}
+
+
+.victory-fireworks {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    overflow: hidden;
+}
+
+
+.victory-card {
+    position: relative;
+
+    z-index: 10;
+
+    width:
+        min(850px, 95vw);
+
+    padding:
+        40px 25px;
+
+    text-align: center;
+
+    border:
+        3px solid #ffd700;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(130,0,0,.97),
+            rgba(65,0,0,.97)
+        );
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.6),
+        0 0 40px rgba(255,215,0,.25);
+}
+
+
+.victory-icon {
+    font-size: 80px;
+
+    animation:
+        trophyBounce
+        1.2s
+        infinite alternate;
+}
+
+
+@keyframes trophyBounce {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            translateY(-10px)
+            rotate(5deg);
+    }
+}
+
+
+.victory-card h2 {
+    margin:
+        10px 0 20px;
+
+    color: #ffd700;
+
+    font-size:
+        clamp(30px, 6vw, 50px);
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 20px rgba(255,215,0,.5);
+}
+
+
+.victory-message {
+    color: #fff1c5;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+.victory-message strong {
+    color: #ffd700;
+}
+
+
+/* =========================================================
+   🏆 FINAL SCORE
+========================================================= */
+
+.final-score {
+    margin:
+        25px auto;
+
+    padding:
+        15px 30px;
+
+    width:
+        min(300px, 90%);
+
+    border:
+        2px solid #ffd700;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,215,0,.08);
+}
+
+
+.score-label {
+    color: #ffe8a5;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+
+#finalScore {
+    margin-top: 5px;
+
+    color: #ffd700;
+
+    font-size: 55px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 20px rgba(255,215,0,.5);
+}
+
+
+/* =========================================================
+   🌾 NHÂN VẬT CUỐI
+========================================================= */
+
+.final-characters {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 60px;
+
+    flex-wrap: wrap;
+
+    margin:
+        25px 0;
+}
+
+
+.final-character {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.final-character img {
+    width: 150px;
+    height: 150px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 10px 12px rgba(0,0,0,.5));
+
+    animation:
+        finalFloat
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+
+.final-character span {
+    margin-top: 5px;
+
+    color: #ffd700;
+
+    font-size: 20px;
+
+    font-weight: 900;
+}
+
+
+.winner-crown {
+    position: absolute;
+
+    top: -20px;
+
+    font-size: 35px;
+
+    z-index: 5;
+
+    animation:
+        crownFloat
+        1.5s
+        infinite alternate;
+}
+
+
+@keyframes finalFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+
+@keyframes crownFloat {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            translateY(-7px)
+            rotate(5deg);
+    }
+}
+
+
+/* =========================================================
+   🎬 VIDEO
+========================================================= */
+
+.ending-video-wrap {
+    width:
+        min(720px, 100%);
+
+    margin:
+        25px auto;
+}
+
+
+.ending-video {
+    display: block;
+
+    width: 100%;
+
+    max-height: 420px;
+
+    border:
+        3px solid #ffd700;
+
+    border-radius: 18px;
+
+    background:
+        #160000;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   🔄 RESTART
+========================================================= */
+
+.btn-restart {
+    margin-top: 10px;
+
+    padding:
+        14px 28px;
+
+    color: #7b0000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff176,
+            #ffd700,
+            #ffab00
+        );
+
+    font-size: 17px;
+
+    box-shadow:
+        0 5px 0 #8d5b00;
+}
+
+
+.btn-restart:hover {
+    box-shadow:
+        0 5px 0 #8d5b00,
+        0 0 25px rgba(255,215,0,.5);
+}
+
+
+/* =========================================================
+   🧧 LỜI CHÚC
+========================================================= */
+
+.tet-wishes {
+    margin-top: 25px;
+
+    color: #ffe8a5;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   🌸 FOOTER
+========================================================= */
+
+.tet-footer {
+    position: relative;
+
+    padding:
+        25px 15px;
+
+    text-align: center;
+
+    color: #ffd700;
+
+    background:
+        #420000;
+
+    border-top:
+        3px solid #ffd700;
+
+    font-weight: 800;
+
+    line-height: 1.8;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   ✨ HIỆU ỨNG PHÁO HOA CŨ
+========================================================= */
+
+.spark {
+    position: fixed;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 999;
+
+    animation:
+        sparkFly
+        1.2s
+        ease-out
+        forwards;
+}
+
+
+@keyframes sparkFly {
+
+    0% {
+        transform:
+            translate(0,0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(
+                var(--dx),
+                var(--dy)
+            )
+            scale(0);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   🌸 HOA BAY THEO CHUỘT
+========================================================= */
+
+.mouse-flower {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 998;
+
+    font-size: 18px;
+
+    animation:
+        flowerFall
+        1.4s
+        ease-out
+        forwards;
+}
+
+
+@keyframes flowerFall {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                -50%,
+                calc(-50% + 50px)
+            )
+            scale(.4)
+            rotate(120deg);
+    }
+}
+
+
+/* =========================================================
+   🎊 CONFETTI
+========================================================= */
+
+.confetti {
+    position: fixed;
+
+    top: -20px;
+
+    width: 9px;
+    height: 14px;
+
+    pointer-events: none;
+
+    z-index: 999;
+
+    animation:
+        confettiFall
+        3s
+        linear
+        forwards;
+}
+
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   📱 TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .tet-header {
+        padding:
+            25px 60px;
+    }
+
+
+    .characters-section {
+        gap: 10px;
+    }
+
+
+    .enemy-card {
+        min-width: 170px;
+    }
+
+
+    .answers-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .battle-scene {
+        gap: 10px;
+    }
+
+
+    .battle-character img {
+        width: 115px;
+        height: 115px;
+    }
+
+}
+
+
+/* =========================================================
+   📱 MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        font-size: 14px;
+    }
+
+
+    .tet-header {
+        min-height: 140px;
+
+        padding:
+            20px 50px;
+    }
+
+
+    .lantern {
+        font-size: 38px;
+    }
+
+
+    .lantern-left {
+        left: 8px;
+    }
+
+
+    .lantern-right {
+        right: 8px;
+    }
+
+
+    .tet-badge {
+        font-size: 10px;
+
+        padding:
+            5px 10px;
+    }
+
+
+    .header-subtitle {
+        letter-spacing: 1px;
+    }
+
+
+    .header-decoration {
+        letter-spacing: 3px;
+    }
+
+
+    .characters-section {
+        padding: 15px 10px;
+
+        gap: 5px;
+    }
+
+
+    .character-card {
+        padding: 5px;
+    }
+
+
+    .character-image-wrap,
+    .enemy-image-wrap {
+        width: 100px;
+        height: 100px;
+    }
+
+
+    .character-image {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    .enemy-image {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    .character-label {
+        font-size: 16px;
+    }
+
+
+    .character-role {
+        font-size: 10px;
+    }
+
+
+    .vs-badge {
+        width: 45px;
+        height: 45px;
+
+        font-size: 15px;
+    }
+
+
+    .enemy-card {
+        min-width: 145px;
+
+        padding: 8px;
+    }
+
+
+    .enemy-warning {
+        font-size: 10px;
+    }
+
+
+    .start-screen {
+        min-height: 600px;
+
+        padding:
+            30px 10px 50px;
+    }
+
+
+    .start-card {
+        padding:
+            25px 15px;
+
+        border-radius: 22px;
+    }
+
+
+    .red-envelope {
+        font-size: 50px;
+    }
+
+
+    .start-card h2 {
+        font-size: 27px;
+    }
+
+
+    .start-story {
+        font-size: 14px;
+    }
+
+
+    .mission-box {
+        gap: 5px;
+
+        padding: 10px;
+    }
+
+
+    .mission-item {
+        min-width: 120px;
+
+        padding: 8px;
+    }
+
+
+    .mission-icon {
+        font-size: 25px;
+    }
+
+
+    .mission-item strong {
+        font-size: 13px;
+    }
+
+
+    .mission-item span {
+        font-size: 9px;
+    }
+
+
+    .mission-plus,
+    .mission-equals {
+        font-size: 20px;
+    }
+
+
+    .btn-start {
+        width: 100%;
+
+        min-width: 0;
+
+        padding:
+            15px 20px;
+    }
+
+
+    .game-screen {
+        padding:
+            18px 10px 40px;
+    }
+
+
+    .game-top {
+        justify-content: center;
+
+        text-align: center;
+    }
+
+
+    .game-title {
+        width: 100%;
+
+        font-size: 18px;
+    }
+
+
+    .question-counter,
+    .score-box {
+        font-size: 12px;
+    }
+
+
+    .question-card {
+        padding:
+            22px 14px;
+    }
+
+
+    .question-card h2 {
+        font-size: 18px;
+    }
+
+
+    .answer-btn {
+        min-height: 65px;
+
+        font-size: 14px;
+    }
+
+
+    .battle-scene {
+        min-height: 180px;
+
+        gap: 3px;
+
+        padding: 10px;
+    }
+
+
+    .battle-character img {
+        width: 85px;
+        height: 85px;
+    }
+
+
+    .battle-vs {
+        font-size: 16px;
+    }
+
+
+    .speech {
+        font-size: 9px;
+
+        padding:
+            6px 8px;
+    }
+
+
+    .final-characters {
+        gap: 25px;
+    }
+
+
+    .final-character img {
+        width: 110px;
+        height: 110px;
+    }
+
+
+    .victory-card {
+        padding:
+            30px 15px;
+    }
+
+
+    .victory-icon {
+        font-size: 60px;
+    }
+
+
+    .victory-card h2 {
+        font-size: 30px;
+    }
+
+
+    .victory-message {
+        font-size: 15px;
+    }
+
+
+    .ending-video {
+        max-height: 280px;
+    }
+
+}
+
+
+/* =========================================================
+   📱 MÀN HÌNH RẤT NHỎ
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .mission-box {
+        flex-direction: column;
+    }
+
+
+    .mission-plus,
+    .mission-equals {
+        transform:
+            rotate(90deg);
+    }
+
+
+    .characters-section {
+        flex-direction: column;
+    }
+
+
+    .vs-badge {
+        margin:
+            -5px 0;
+    }
+
+
+    .enemy-card {
+        width: 180px;
+    }
+
+}
+
+
+/* =========================================================
+   🚫 TRÁNH CHỌN NHẦM LỚP HIỆU ỨNG
+========================================================= */
+
+#startFireworks,
+#effects,
+#flowerTrail,
+#victoryEffects {
+    user-select: none;
+    -webkit-user-select: none;
+
+    touch-action: none;
+}
+
+
+/* =========================================================
+   🎮 ĐẢM BẢO BUTTON LUÔN CLICK ĐƯỢC
+========================================================= */
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+#startBtn,
+#nextBtn,
+#restartBtn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+
+/* =========================================================
+   🎆 START CARD LUÔN NẰM TRÊN PHÁO
+========================================================= */
+
+#startScreen {
+    position: relative;
+
+    z-index: 10;
+}
+
+
+#startScreen .start-card {
+    position: relative;
+
+    z-index: 50;
+}

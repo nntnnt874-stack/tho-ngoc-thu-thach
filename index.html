@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Tết Lúa & Nếp – Trò chơi đánh bại Lân Tân Sửu"
+    >
+
+    <title>Tết Lúa & Nếp – Đánh bại Lân Tân Sửu</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         🎆 PHÁO HOA MÀN HÌNH CHỜ
+         ===================================================== -->
+
+    <div
+        id="startFireworks"
+        class="start-fireworks"
+        aria-hidden="true">
+    </div>
+
+
+    <!-- =====================================================
+         🔊 ÂM THANH
+         ===================================================== -->
+
+    <audio
+        id="waitingMusic"
+        src="nhac-cho.mp3"
+        loop
+        preload="auto">
+    </audio>
+
+    <audio
+        id="gameMusic"
+        src="nhac-choi.mp3"
+        loop
+        preload="auto">
+    </audio>
+
+
+    <!-- =====================================================
+         ✨ HIỆU ỨNG TOÀN TRANG
+         ===================================================== -->
+
+    <div
+        id="effects"
+        class="effects-layer"
+        aria-hidden="true">
+    </div>
+
+    <div
+        id="flowerTrail"
+        class="flower-trail"
+        aria-hidden="true">
+    </div>
+
+    <div
+        id="victoryEffects"
+        class="victory-effects"
+        aria-hidden="true">
+    </div>
+
+
+    <!-- =====================================================
+         🏮 HEADER TẾT
+         ===================================================== -->
+
+    <header class="tet-header">
+
+        <div
+            class="lantern lantern-left"
+            aria-hidden="true">
+            🏮
+        </div>
+
+        <div
+            class="lantern lantern-right"
+            aria-hidden="true">
+            🏮
+        </div>
+
+        <div class="header-content">
+
+            <div class="tet-badge">
+                🧧 TẾT VIỆT NAM 🧧
+            </div>
+
+            <h1>
+                🌾 TẾT LÚA & NẾP 🍚
+            </h1>
+
+            <div class="header-subtitle">
+                ĐÁNH BẠI LÂN TÂN SỬU
+            </div>
+
+            <div class="header-decoration">
+                ✨ 🧨 ✨ 🧨 ✨
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         🌾 NHÂN VẬT
+         ===================================================== -->
+
+    <section
+        class="characters-section"
+        aria-label="Các nhân vật">
+
+        <!-- LÚA -->
+
+        <div class="character-card character-lua">
+
+            <div class="character-glow"></div>
+
+            <div class="character-image-wrap">
+
+                <img
+                    id="luaCharacter"
+                    class="character-image"
+                    src="lua.png"
+                    alt="Nhân vật Lúa">
+
+            </div>
+
+            <div class="character-info">
+
+                <div class="character-label">
+                    🌾 LÚA
+                </div>
+
+                <div class="character-role">
+                    Chiến binh mùa vàng
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VS -->
+
+        <div class="vs-badge">
+            <span>VS</span>
+        </div>
+
+
+        <!-- NẾP -->
+
+        <div class="character-card character-nep">
+
+            <div class="character-glow"></div>
+
+            <div class="character-image-wrap">
+
+                <img
+                    id="nepCharacter"
+                    class="character-image"
+                    src="nep.png"
+                    alt="Nhân vật Nếp">
+
+            </div>
+
+            <div class="character-info">
+
+                <div class="character-label">
+                    🍚 NẾP
+                </div>
+
+                <div class="character-role">
+                    Chiến binh dẻo dai
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LÂN TÂN SỬU -->
+
+        <div class="enemy-card">
+
+            <div class="enemy-warning">
+                ⚠️ KẺ THÙ ⚠️
+            </div>
+
+            <div class="enemy-image-wrap">
+
+                <img
+                    id="tanSuu"
+                    class="enemy-image"
+                    src="lan-tan-suu.png"
+                    alt="Lân Tân Sửu">
+
+            </div>
+
+            <div class="enemy-health">
+
+                <div class="health-title">
+                    🦁 MÁU LÂN TÂN SỬU
+                </div>
+
+                <div class="health-bar">
+
+                    <div
+                        id="enemyHealth"
+                        class="health-fill"
+                        style="width:100%;">
+                    </div>
+
+                </div>
+
+                <div
+                    id="enemyHealthText"
+                    class="health-text">
+                    100%
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         🎮 MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             🧧 MÀN HÌNH START
+             ================================================= -->
+
+        <section
+            id="startScreen"
+            class="screen start-screen">
+
+            <div class="start-card">
+
+                <div class="start-decoration">
+                    🧧
+                </div>
+
+                <div class="red-envelope">
+                    🧧
+                </div>
+
+                <h2>
+                    🎊 THỬ THÁCH TẾT 🎊
+                </h2>
+
+                <p class="start-story">
+
+                    Lân Tân Sửu đang xuất hiện và gây náo loạn
+                    ngày Tết!
+
+                    <br><br>
+
+                    Hãy cùng
+                    <strong>🌾 Lúa</strong>
+                    và
+                    <strong>🍚 Nếp</strong>
+                    trả lời đúng các câu hỏi
+                    để đánh bại Lân.
+
+                </p>
+
+
+                <!-- NHIỆM VỤ -->
+
+                <div class="mission-box">
+
+                    <div class="mission-item">
+
+                        <div class="mission-icon">
+                            🌾
+                        </div>
+
+                        <div>
+
+                            <strong>LÚA</strong>
+
+                            <span>
+                                Sẵn sàng chiến đấu
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mission-plus">
+                        +
+                    </div>
+
+
+                    <div class="mission-item">
+
+                        <div class="mission-icon">
+                            🍚
+                        </div>
+
+                        <div>
+
+                            <strong>NẾP</strong>
+
+                            <span>
+                                Không ngại thử thách
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mission-equals">
+                        =
+                    </div>
+
+
+                    <div class="mission-item">
+
+                        <div class="mission-icon">
+                            🦁
+                        </div>
+
+                        <div>
+
+                            <strong>LÂN</strong>
+
+                            <span>
+                                Kẻ phải bị đánh bại!
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- THÔNG TIN -->
+
+                <div class="start-note">
+
+                    <span>
+                        🎯
+                    </span>
+
+                    <span>
+                        8 câu hỏi – Trả lời đúng để
+                        hạ gục Lân!
+                    </span>
+
+                </div>
+
+
+                <!-- NÚT START -->
+
+                <button
+                    id="startBtn"
+                    class="btn btn-start"
+                    type="button">
+
+                    <span class="btn-icon">
+                        🎮
+                    </span>
+
+                    <span>
+                        BẮT ĐẦU
+                    </span>
+
+                    <span class="btn-sparkle">
+                        ✨
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ⚔️ MÀN HÌNH GAME
+             ================================================= -->
+
+        <section
+            id="gameScreen"
+            class="screen game-screen hidden">
+
+
+            <!-- THANH THÔNG TIN -->
+
+            <div class="game-top">
+
+                <div class="game-title">
+                    🧨 TRẬN CHIẾN TẾT 🧨
+                </div>
+
+
+                <div class="question-counter">
+
+                    CÂU
+
+                    <span id="currentQuestion">
+                        1
+                    </span>
+
+                    /
+
+                    <span id="totalQuestions">
+                        8
+                    </span>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    🏆
+
+                    <span id="score">
+                        0
+                    </span>
+
+                    điểm
+
+                </div>
+
+            </div>
+
+
+            <!-- TIẾN ĐỘ -->
+
+            <div class="progress-container">
+
+                <div class="progress-label">
+
+                    <span>
+                        Tiến độ đánh bại Lân
+                    </span>
+
+                    <span id="progressPercent">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                        style="width:0%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ❓ CÂU HỎI
+                 ================================================= -->
+
+            <div class="question-card">
+
+                <div class="question-decoration">
+                    🌸 🧧 🌸
+                </div>
+
+
+                <div
+                    id="questionNumber"
+                    class="question-number">
+
+                    Câu 1
+
+                </div>
+
+
+                <h2 id="questionText">
+                    Câu hỏi đang tải...
+                </h2>
+
+
+                <!-- ĐÁP ÁN -->
+
+                <div
+                    id="answersContainer"
+                    class="answers-grid">
+
+                </div>
+
+
+                <!-- FEEDBACK -->
+
+                <div
+                    id="feedback"
+                    class="feedback hidden">
+
+                    <div
+                        id="feedbackIcon"
+                        class="feedback-icon">
+
+                        🎉
+
+                    </div>
+
+
+                    <div
+                        id="feedbackTitle"
+                        class="feedback-title">
+
+                        CHÍNH XÁC!
+
+                    </div>
+
+
+                    <div
+                        id="feedbackText"
+                        class="feedback-text">
+
+                        Tuyệt vời!
+
+                    </div>
+
+                </div>
+
+
+                <!-- CÂU TIẾP -->
+
+                <button
+                    id="nextBtn"
+                    class="btn btn-next hidden"
+                    type="button">
+
+                    <span>
+                        CÂU TIẾP THEO
+                    </span>
+
+                    <span>
+                        ➜
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 ⚔️ CHIẾN TRƯỜNG
+                 ================================================= -->
+
+            <div class="battle-scene">
+
+
+                <!-- LÚA -->
+
+                <div
+                    id="luaBattle"
+                    class="battle-character battle-lua">
+
+                    <img
+                        src="lua.png"
+                        alt="Lúa chiến đấu">
+
+                </div>
+
+
+                <!-- VS -->
+
+                <div class="battle-vs">
+                    ⚡ VS ⚡
+                </div>
+
+
+                <!-- NẾP -->
+
+                <div
+                    id="nepBattle"
+                    class="battle-character battle-nep">
+
+                    <img
+                        src="nep.png"
+                        alt="Nếp chiến đấu">
+
+                </div>
+
+
+                <!-- LÂN -->
+
+                <div
+                    id="tanSuuBattle"
+                    class="battle-character battle-enemy">
+
+                    <img
+                        src="lan-tan-suu.png"
+                        alt="Lân Tân Sửu">
+
+                </div>
+
+
+                <!-- ĐÒN ĐÁNH -->
+
+                <div
+                    class="attack-effect"
+                    aria-hidden="true">
+
+                    💥
+
+                </div>
+
+
+                <!-- BONG BÓNG THOẠI -->
+
+                <div class="comic hidden">
+
+                    <div
+                        id="luaSpeech"
+                        class="speech lua-speech">
+
+                        🌾 Lúa cố lên!
+
+                    </div>
+
+
+                    <div
+                        id="nepSpeech"
+                        class="speech nep-speech">
+
+                        🍚 Nếp chiến thôi!
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TRẠNG THÁI LÂN -->
+
+            <div
+                id="enemyStatus"
+                class="enemy-status">
+
+                <span>
+                    🦁
+                </span>
+
+                <span id="enemyMessage">
+                    Lân Tân Sửu đang thách thức bạn!
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             🏆 MÀN HÌNH CHIẾN THẮNG
+             ================================================= -->
+
+        <section
+            id="endScreen"
+            class="screen end-screen hidden">
+
+
+            <!-- PHÁO HOA -->
+
+            <div
+                class="victory-fireworks"
+                aria-hidden="true">
+            </div>
+
+
+            <div class="victory-card">
+
+
+                <div class="victory-icon">
+                    🏆
+                </div>
+
+
+                <h2>
+                    🎉 CHÚC MỪNG! 🎉
+                </h2>
+
+
+                <div class="victory-message">
+
+                    <strong>
+                        Lân Tân Sửu đã bị đánh bại!
+                    </strong>
+
+                    <br><br>
+
+                    🌾 Lúa và 🍚 Nếp đã bảo vệ thành công
+                    ngày Tết!
+
+                </div>
+
+
+                <!-- ĐIỂM -->
+
+                <div class="final-score">
+
+                    <div class="score-label">
+                        ĐIỂM CỦA BẠN
+                    </div>
+
+                    <div id="finalScore">
+                        0
+                    </div>
+
+                </div>
+
+
+                <!-- NHÂN VẬT CHIẾN THẮNG -->
+
+                <div class="final-characters">
+
+
+                    <div class="final-character">
+
+                        <div class="winner-crown">
+                            👑
+                        </div>
+
+                        <img
+                            src="lua.png"
+                            alt="Lúa chiến thắng">
+
+                        <span>
+                            🌾 LÚA
+                        </span>
+
+                    </div>
+
+
+                    <div class="final-character">
+
+                        <div class="winner-crown">
+                            👑
+                        </div>
+
+                        <img
+                            src="nep.png"
+                            alt="Nếp chiến thắng">
+
+                        <span>
+                            🍚 NẾP
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VIDEO -->
+
+                <div class="ending-video-wrap">
+
+                    <video
+                        id="endingVideo"
+                        class="ending-video"
+                        controls
+                        playsinline
+                        preload="metadata">
+
+                        <source
+                            src="video-ket-thuc.mp4"
+                            type="video/mp4">
+
+                        Trình duyệt của bạn không hỗ trợ
+                        video HTML5.
+
+                    </video>
+
+                </div>
+
+
+                <!-- CHƠI LẠI -->
+
+                <button
+                    id="restartBtn"
+                    class="btn btn-restart"
+                    type="button">
+
+                    🔄 CHƠI LẠI
+
+                </button>
+
+
+                <!-- LỜI CHÚC -->
+
+                <div class="tet-wishes">
+
+                    🧧 Chúc mừng năm mới 🧧
+
+                    <br>
+
+                    🎊 An khang – Thịnh vượng – Hạnh phúc 🎊
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         🌸 FOOTER
+         ===================================================== -->
+
+    <footer class="tet-footer">
+
+        <div>
+            🌸 🌸 🌸
+        </div>
+
+        <div>
+            Tết Lúa & Nếp
+        </div>
+
+        <div>
+            🧧 Tiểu đội 10 🧧
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         📜 JAVASCRIPT
+         ===================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
